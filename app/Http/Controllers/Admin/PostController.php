@@ -26,7 +26,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.create');
     }
 
     /**
@@ -37,7 +37,16 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $post = new Post();
+
+        $post->image = $request['image'];
+        $post->title = $request['title'];
+        $post->subtitle = $request['subtitle'];
+        $post->body = $request['body'];
+
+        $post->save();
+
+        return redirect()->route('admin.posts.index');
     }
 
     /**
@@ -48,7 +57,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return view('admin.posts.show', compact('post'));
     }
 
     /**
