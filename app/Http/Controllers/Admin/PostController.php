@@ -26,7 +26,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.create');
+        return view('admin.posts.create');
     }
 
     /**
@@ -68,7 +68,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('admin.posts.edit', compact('post'));
     }
 
     /**
@@ -80,7 +80,9 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $post->update($request->all());
+
+        return redirect()->route('admin.posts.show', $post->id);
     }
 
     /**
