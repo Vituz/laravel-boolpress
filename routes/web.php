@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,11 +21,18 @@ Route::get('/', function () {
     return view('guest.welcome');
 });
 
+Route::get('/', 'PageController@index')->name('home');
+Route::get('about', 'PageController@abouts')->name('abouts');
+
+/* Contact Routes */
+Route::get('contacts', 'PageController@contacts')->name('contacts');
+Route::post('contacts', 'PageController@sendContactForm')->name('contacts.send');
+
+
 Route::resource('posts', PostController::class)->only(['index', 'show']);
 
 
 Auth::routes();
-
 
 /* Admin Routes */
 Route::middleware('auth')->prefix('admin')->namespace('Admin')->name('admin.')->group(function () {
