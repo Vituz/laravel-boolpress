@@ -3,14 +3,14 @@
 
 @section('content')
 <div class="container">
-    <form action="{{route('admin.posts.update', $post->id)}}" method="post">
+    <form action="{{route('admin.posts.update', $post->id)}}" method="post" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
         <div class="form-group">
-            <label for="image">Image</label>
-            <input type="text" name="image" id="image" class="form-control" placeholder="Inserte image url here" aria-describedby="helpId" required value="{{$post->image}}">
-            <small id="helpId" class="text-muted">Copy and paste image url here</small>
+            <label for="image">Replace Cover Image</label>
+            <img width="400" src="{{asset('storage/' . $post->image)}}" alt="{{$post->image}}" class="d-block mt-3 mb-3">
+            <input type="file" name="image" id="image">
         </div>
 
         <div class="form-group">
@@ -18,17 +18,26 @@
             <input type="text" name="title" id="title" class="form-control" placeholder="Inserte Title" aria-describedby="helpId" required value="{{$post->title}}">
             <small id="helpId" class="text-muted">Type a title with max 120 characters</small>
         </div>
+        @error('title')
+        <div class="alert alert-danger">{{$message}}</div>
+        @enderror
 
         <div class="form-group">
             <label for="subtitle">Subtitle</label>
             <input type="text" name="subtitle" id="subtitle" class="form-control" placeholder="Inserte subtitle" aria-describedby="helpId" required value="{{$post->subtitle}}">
             <small id="helpId" class="text-muted">Type a subtitle with max 100 characters</small>
         </div>
+        @error('subtitle')
+        <div class="alert alert-danger">{{$message}}</div>
+        @enderror
 
         <div class="form-group">
             <label for="body"></label>
             <textarea class="form-control" name="body" id="body" rows="3" required">{{$post->body}}</textarea>
         </div>
+        @error('body')
+        <div class="alert alert-danger">{{$message}}</div>
+        @enderror
 
         <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
 

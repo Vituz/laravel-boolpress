@@ -1,8 +1,5 @@
 <?php
 
-use App\Http\Controllers\Admin\PostController as AdminPostController;
-use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,7 +20,7 @@ Route::get('/', function () {
     return view('guest.welcome');
 });
 
-Route::resource('posts', \PostController::class)->only(['index', 'show']);
+Route::resource('posts', PostController::class)->only(['index', 'show']);
 
 
 Auth::routes();
@@ -32,5 +29,5 @@ Auth::routes();
 /* Admin Routes */
 Route::middleware('auth')->prefix('admin')->namespace('Admin')->name('admin.')->group(function () {
     Route::get('/', 'HomeController@index')->name('dashboard');
-    Route::resource('posts', \PostController::class);
+    Route::resource('posts', PostController::class);
 });

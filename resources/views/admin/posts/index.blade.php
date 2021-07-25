@@ -4,6 +4,8 @@
 
 <div class="container">
 
+    <a href="{{route('admin.posts.create')}}" class="btn btn-primary m-4">New Post</a>
+
     <table class="table">
         <thead>
             <tr>
@@ -19,22 +21,21 @@
             @foreach($posts as $post)
             <tr>
                 <td>{{$post->id}}</td>
-                <td><img width="100" src="{{$post->image}}" alt="{{$post->title}}"></td>
+                <td><img width="100" src="{{asset('storage/' . $post->image)}}" alt="{{$post->title}}"></td>
                 <td>{{$post->title}}</td>
                 <td>{{$post->subtitle}}</td>
                 <td>{{$post->body}}</td>
-                <td>
-                    <a href="{{route('admin.posts.show', $post->id)}}">View</a>
-                    | <a href="{{route('admin.posts.edit', $post->id)}}">Edit</a>
-                    |
+                <td class="d-flex">
+                    <a href="{{route('admin.posts.show', $post->id)}}" class="btn btn-primary m-1"><i class="far fa-eye"></i></a>
+                    <a href="{{route('admin.posts.edit', $post->id)}}" class="btn btn-secondary m-1"><i class="fas fa-pencil-alt"></i></a>
+
                     <form action="{{route('admin.posts.destroy', $post->id)}}" method="post">
                         @csrf
 
                         @method('DELETE')
 
-                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <button type="submit" class="btn btn-danger m-1"><i class="fa fa-trash" aria-hidden="true"></i></button>
                     </form>
-                    <!-- <a href="#">Delete</a> -->
                 </td>
             </tr>
             @endforeach

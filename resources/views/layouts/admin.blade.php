@@ -17,6 +17,9 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+
     <!-- Styles -->
     <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
 </head>
@@ -26,7 +29,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/admin') }}">
-                    Boolpress
+                    {{ config('app.name', 'Boolpress') }}
                 </a>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -58,7 +61,11 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                <a class="dropdown-item" href="{{ route('admin.dashboard') }}">
+
+                                    {{ __('Admin') }}
+                                </a>
+                                <a class=" dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
@@ -74,22 +81,28 @@
             </div>
         </nav>
 
-        <div class="left_nav">
-            <h2>Dashboard</h2>
+        <main class="py-4 d-flex container">
 
-            <ul>
-                <li>
-                    <a href="{{route('admin.posts.index')}}">Posts</a>
-                </li>
-                <li>
-                    <a href="{{route('admin.posts.create')}}">New Post</a>
-                </li>
-            </ul>
+            <div class="left_nav mr-3">
+                <ul class=" nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{route('admin.dashboard')}}">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('admin.posts.index')}}">Posts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Categories</a>
+                    </li>
+                </ul>
+            </div>
 
-        </div>
-
-        <main class="py-4">
-            @yield('content')
+            <div>
+                @yield('content')
+            </div>
         </main>
     </div>
 </body>

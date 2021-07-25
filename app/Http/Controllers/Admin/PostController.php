@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -37,15 +38,20 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $post = new Post();
 
-        $post->image = $request['image'];
-        $post->title = $request['title'];
-        $post->subtitle = $request['subtitle'];
-        $post->body = $request['body'];
+        $validateData = $request->validate([
+            'title' => 'required | min:5 | max:120',
+            'image' => 'required | file | max:500',
+            'subtitle' => 'required|min:5|max:100',
+            'body' => 'required|min:5',
+        ]);
 
-        $post->save();
 
+        $file_path = Storage::put('post_images', $validateData['image']);
+
+        $validateData['image'] = $file_path;
+
+        Post::create($validateData);
         return redirect()->route('admin.posts.index');
     }
 
@@ -80,7 +86,19 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        $post->update($request->all());
+        $validateData = $request->validate([
+            'title' => 'required | min:5 | max:120',
+            'image' => 'nullable | file | max:500',
+            'subtitle' => 'required|min:5|max:100',
+            'body' => 'required|min:5',
+        ]);
+
+        if ($request->hasFile('image')) {
+            $file_path = Storage::put('post_images', $validateData['image']);
+            $validateData['image'] = $file_path;
+        }
+
+        $post->update($validateData);
 
         return redirect()->route('admin.posts.show', $post->id);
     }

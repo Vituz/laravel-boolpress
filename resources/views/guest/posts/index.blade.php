@@ -9,7 +9,7 @@
         <div class="col-md-12">
             <a href="{{route('posts.show', $post->id)}}">
                 <div class="card text-left my-4">
-                    <img class="card-img-top" src="{{$post->image}}" alt="{{$post->title}}">
+                    <img class="card-img-top" src="{{asset('storage/' . $post->image)}}" alt="{{$post->title}}">
                     <div class="card-body">
                         <h4 class="card-title">{{$post->title}}</h4>
                         <h5 class="card-subtitle">{{$post->subtitle}}</h5>
