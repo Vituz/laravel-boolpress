@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Contact;
 use App\Mail\ContactFormMail;
 use Illuminate\Http\Request;
 use Illuminate\Mail\Mailable;
@@ -39,6 +40,7 @@ class PageController extends Controller
         // return (new ContactFormMail($validateData))->render();
 
         Mail::to('admin@test.com')->send(new ContactFormMail($validateData));
+        $contact = Contact::create($validateData);
 
         return redirect()
             ->back()

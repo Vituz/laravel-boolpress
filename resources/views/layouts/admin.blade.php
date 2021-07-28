@@ -100,7 +100,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link list-group-item {{Route::currentRouteName() === 'admin.users.index' ? 'active' : ''}}" href="#">Users</a>
+                            <a class="nav-link list-group-item {{Route::currentRouteName() === 'admin.contacts.index' ? 'active' : ''}}" href="{{route('admin.contacts.index')}}">Email</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link list-group-item {{Route::currentRouteName() === 'admin.categories.index' ? 'active' : ''}}" href="#">Categories</a>
