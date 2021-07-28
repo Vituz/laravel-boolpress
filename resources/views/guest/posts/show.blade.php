@@ -11,6 +11,17 @@
                 <div class="card-body">
                     <h4 class="card-title">{{$post->title}}</h4>
                     <h5 class="card-subtitle">{{$post->subtitle}}</h5>
+                    <h5 class="card-subtitle ">Category: </h5>
+                    <div class="tags">
+                        Tags:
+
+                        @forelse($post->tags as $tag)
+                        <span>{{$tag->name}}</span>
+                        @empty
+                        <span>no tags yet</span>
+
+                        @endforelse
+                    </div>
                     <p class="card-text">{{$post->body}}</p>
                 </div>
             </div>

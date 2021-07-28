@@ -13,6 +13,7 @@
                     <div class="card-body">
                         <h4 class="card-title">{{$post->title}}</h4>
                         <h5 class="card-subtitle">{{$post->subtitle}}</h5>
+                        <h5 class="card-subtitle ">Category: {{$post->category->name}}</h5>
                         <p class="card-text">{{$post->body}}</p>
                     </div>
                 </div>
@@ -20,6 +21,9 @@
         </div>
         @endforeach
 
+    </div>
+    <div class="mx-auto" style="width: 200px;">
+        {{ $posts->links() }}
     </div>
 </div>
 

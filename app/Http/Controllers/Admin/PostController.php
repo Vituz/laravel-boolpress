@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Category;
 use App\Http\Controllers\Controller;
 use App\Post;
+use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+
 
 class PostController extends Controller
 {
@@ -16,7 +19,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::orderBy('id', 'desc')->paginate(10);
+
         return view('admin.posts.index', compact('posts'));
     }
 
@@ -27,7 +31,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create');
+        $categories = Category::all();
+        $tags = Tag::all();
+        return view('admin.posts.create', compact('categories', 'tags'));
     }
 
     /**
@@ -39,10 +45,13 @@ class PostController extends Controller
     public function store(Request $request)
     {
 
+        // ddd($request->all());
         $validateData = $request->validate([
             'title' => 'required | min:5 | max:120',
             'image' => 'required | file | max:500',
             'subtitle' => 'required|min:5|max:100',
+            'category_id' => 'nullable | exists:categories,id',
+            'tags' => 'nullabe | exists:tags,id',
             'body' => 'required|min:5',
         ]);
 
@@ -51,7 +60,9 @@ class PostController extends Controller
 
         $validateData['image'] = $file_path;
 
-        Post::create($validateData);
+        // ddd($validateData);
+        $post = Post::create($validateData);
+        $post->tags()->attach($request->tags);
         return redirect()->route('admin.posts.index');
     }
 
@@ -74,7 +85,9 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('admin.posts.edit', compact('post'));
+        $categories = Category::all();
+        $tags = Tag::all();
+        return view('admin.posts.edit', compact('post', 'categories', 'tags'));
     }
 
     /**
@@ -90,6 +103,8 @@ class PostController extends Controller
             'title' => 'required | min:5 | max:120',
             'image' => 'nullable | file | max:500',
             'subtitle' => 'required|min:5|max:100',
+            'category_id' => 'nullable | exists:categories,id',
+            'tags' => 'nullable | exists:tags,id',
             'body' => 'required|min:5',
         ]);
 
@@ -99,7 +114,7 @@ class PostController extends Controller
         }
 
         $post->update($validateData);
-
+        $post->tags()->sync($request->tags);
         return redirect()->route('admin.posts.show', $post->id);
     }
 
@@ -111,6 +126,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        $post->tags()->detach();
         $post->delete();
         return redirect()->route('admin.posts.index');
     }

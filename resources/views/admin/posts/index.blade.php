@@ -4,7 +4,10 @@
 
 <div class="container">
 
-    <a href="{{route('admin.posts.create')}}" class="btn btn-primary m-4">New Post</a>
+    <section class="d-flex justify-content-md-between">
+        <h1>Posts List</h1>
+        <a href="{{route('admin.posts.create')}}" class="btn btn-primary m-4"><i class="fas fa-plus mr-2"></i>New Post</a>
+    </section>
 
     <table class="table">
         <thead>
@@ -41,7 +44,10 @@
             @endforeach
         </tbody>
     </table>
-</div>
+
+    <div class="mx-auto" style="width: 200px;">
+        {{ $posts->links() }}
+    </div>
 
 </div>
 

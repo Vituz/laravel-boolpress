@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Post;
+use App\Tag;
 use Illuminate\Http\Request;
 
-class PostController extends Controller
+class TagController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,18 +14,18 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
-        return view('guest.posts.index', compact('posts'));
+        //
     }
+
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Post  $post
+     * @param  \App\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show(Tag $tag)
     {
-        return view('guest.posts.show', compact('post'));
+        //
     }
 }

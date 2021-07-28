@@ -84,9 +84,10 @@
         <main class="py-4 d-flex container">
 
             <div class="left_nav mr-3">
+
                 <ul class=" nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('admin.dashboard')}}">Dashboard</a>
+                        <a class="nav-link list-group-item " href="{{route('admin.dashboard')}}">Dashboard</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('admin.posts.index')}}">Posts</a>
@@ -98,6 +99,7 @@
                         <a class="nav-link" href="#">Categories</a>
                     </li>
                 </ul>
+
             </div>
 
             <div>

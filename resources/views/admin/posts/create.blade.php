@@ -4,6 +4,16 @@
 @section('content')
 <h1>Create new Post</h1>
 
+@if($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach($errors->all() as $error)
+        <li>{{$error}}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
 <div class="container">
 
     <form action="{{route('admin.posts.store')}}" method="post" enctype="multipart/form-data">
@@ -37,8 +47,34 @@
         @enderror
 
         <div class="form-group">
+            <label for="category_id">Chose category</label>
+            <select name="category_id" id="category_id" class="form-control" value="{{old('category_id')}}">
+                <option>Select a category</option>
+
+                @foreach($categories as $category)
+                <option value=" {{$category->id}}">{{$category->name}}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="tags">tags</label>
+            <select multiple class="form-control" name="tags[]" id="tags">
+                <option value="" disabled> Select a tag</option>
+
+                @if($tags)
+                @foreach($tags as $tag)
+                <option value="{{$tag->id}}">{{$tag->name}}</option>
+                @endforeach
+                @endif
+
+            </select>
+        </div>
+
+
+        <div class="form-group">
             <label for="body"></label>
-            <textarea class="form-control @error('body') is-invalid @enderror" name="body" id="body" rows="3" required>{{old('image')}}</textarea>
+            <textarea class="form-control @error('body') is-invalid @enderror" name="body" id="body" rows="3" required>{{old('body')}}</textarea>
         </div>
         @error('body')
         <div class="alert alert-danger">{{$message}}</div>
