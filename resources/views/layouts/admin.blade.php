@@ -81,29 +81,36 @@
             </div>
         </nav>
 
-        <main class="py-4 d-flex container">
+        <main class="mt-5 container">
 
-            <div class="left_nav mr-3">
+            <div class="row">
+                <div class="left_nav col-3">
 
-                <ul class=" nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link list-group-item " href="{{route('admin.dashboard')}}">Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('admin.posts.index')}}">Posts</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Users</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Categories</a>
-                    </li>
-                </ul>
+                    <ul class=" nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link list-group-item {{Route::currentRouteName() === 'admin.dashboard' ? 'active' : ''}}" href="{{route('admin.dashboard')}}">
+                                <i class="fas fa-tachometer-alt"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link list-group-item {{Route::currentRouteName() === 'admin.posts.index' ? 'active' : ''}}" href="{{route('admin.posts.index')}}">
+                                <i class="far fa-newspaper"></i>
+                                Posts
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link list-group-item {{Route::currentRouteName() === 'admin.users.index' ? 'active' : ''}}" href="#">Users</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link list-group-item {{Route::currentRouteName() === 'admin.categories.index' ? 'active' : ''}}" href="#">Categories</a>
+                        </li>
+                    </ul>
+                </div>
 
-            </div>
-
-            <div>
-                @yield('content')
+                <div class="col-9">
+                    @yield('content')
+                </div>
             </div>
         </main>
     </div>

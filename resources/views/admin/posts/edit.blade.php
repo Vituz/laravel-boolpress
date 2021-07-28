@@ -46,12 +46,12 @@
         @enderror
 
         <div class="form-group">
-            <label for="category_id">Chose category</label>
-            <select name="category_id @error('category_id') is-invalid @enderror" id="category_id" class="form-control">
+            <label for="category_id">Choose category</label>
+            <select name="category_id" id="category_id" class="form-control @error('subtitle') is-invalid @enderror">
                 <option value="">Select a category</option>
 
                 @foreach($categories as $category)
-                <option value="{{$category->id}}" {{$category->id == old('category_id', $post->category_id) ? 'selected' : ''}}>{{$category->name}}</option>
+                <option value="{{$category->id}}" {{$category->id == old('category_id', $post->category_id) ? 'selected' : ''}}> {{$category->name}}</option>
                 @endforeach
             </select>
         </div>

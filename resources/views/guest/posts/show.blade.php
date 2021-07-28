@@ -11,7 +11,7 @@
                 <div class="card-body">
                     <h4 class="card-title">{{$post->title}}</h4>
                     <h5 class="card-subtitle">{{$post->subtitle}}</h5>
-                    <h5 class="card-subtitle ">Category: </h5>
+                    <h5 class="card-subtitle ">Category: {{$post->category->name}}</h5>
                     <div class="tags">
                         Tags:
 

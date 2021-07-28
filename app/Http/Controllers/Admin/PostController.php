@@ -51,7 +51,7 @@ class PostController extends Controller
             'image' => 'required | file | max:500',
             'subtitle' => 'required|min:5|max:100',
             'category_id' => 'nullable | exists:categories,id',
-            'tags' => 'nullabe | exists:tags,id',
+            'tags' => 'nullable | exists:tags,id',
             'body' => 'required|min:5',
         ]);
 
@@ -99,6 +99,8 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+
+        // ddd($request->all());
         $validateData = $request->validate([
             'title' => 'required | min:5 | max:120',
             'image' => 'nullable | file | max:500',
@@ -107,12 +109,12 @@ class PostController extends Controller
             'tags' => 'nullable | exists:tags,id',
             'body' => 'required|min:5',
         ]);
+        // ddd($validateData);
 
         if ($request->hasFile('image')) {
             $file_path = Storage::put('post_images', $validateData['image']);
             $validateData['image'] = $file_path;
         }
-
         $post->update($validateData);
         $post->tags()->sync($request->tags);
         return redirect()->route('admin.posts.show', $post->id);
