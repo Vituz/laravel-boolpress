@@ -100,7 +100,6 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
 
-        // ddd($request->all());
         $validateData = $request->validate([
             'title' => 'required | min:5 | max:120',
             'image' => 'nullable | file | max:500',
@@ -109,11 +108,9 @@ class PostController extends Controller
             'tags' => 'nullable | exists:tags,id',
             'body' => 'required|min:5',
         ]);
-        // ddd($validateData);
 
         if ($request->hasFile('image')) {
 
-            // ddd($post->image);
             Storage::delete($post->image);
             $file_path = Storage::put('post_images', $validateData['image']);
             $validateData['image'] = $file_path;
