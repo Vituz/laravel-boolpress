@@ -40,7 +40,7 @@
                             <a class="navbar-brand" href="{{route('posts.index')}}">Posts</a>
                         </li>
                         <li>
-                            <a class="navbar-brand" href="{{route('contacts')}}">Contacts</a>
+                            <a class="navbar-brand" href="{{route('contacts')}}">Contacts Us</a>
                         </li>
 
                     </ul>
