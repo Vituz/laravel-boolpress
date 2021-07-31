@@ -40,6 +40,9 @@
                             <a class="navbar-brand" href="{{route('posts.index')}}">Posts</a>
                         </li>
                         <li>
+                            <a class="navbar-brand" href=" {{route('vue-blog')}} ">Vue Blog</a>
+                        </li>
+                        <li>
                             <a class="navbar-brand" href="{{route('contacts')}}">Contacts Us</a>
                         </li>
 

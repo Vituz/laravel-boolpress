@@ -1,7 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\ContactController;
-use App\Http\Controllers\PageController;
+use App\Post;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,8 +28,12 @@ Route::get('about', 'PageController@abouts')->name('abouts');
 Route::get('contacts', 'PageController@contacts')->name('contacts');
 Route::post('contacts', 'PageController@sendContactForm')->name('contacts.send');
 
-
+/* Guest posts Routes */
 Route::resource('posts', PostController::class)->only(['index', 'show']);
+
+Route::get('vue-blog', function () {
+    return view('vue.blog');
+})->name('vue-blog');
 
 
 Auth::routes();
